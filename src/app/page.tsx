@@ -74,6 +74,38 @@ const kitchenProblems = [
   "Cheap finishes",
 ];
 
+const contactDetails = [
+  {
+    label: "Design Studio",
+    value: "325 N Wells Street, Suite 410, Chicago, IL 60654",
+    icon: MapPin,
+  },
+  {
+    label: "Call or Text",
+    value: "+1 (000) 000-0000",
+    icon: Phone,
+  },
+  {
+    label: "Email",
+    value: "hello@luxecraftkitchenstudio.com",
+    icon: Mail,
+  },
+  {
+    label: "Studio Hours",
+    value: "Mon - Sat, 9:00 AM - 6:00 PM",
+    icon: Clock,
+  },
+];
+
+const serviceAreas = [
+  "Downtown",
+  "Northside",
+  "West End",
+  "Lake District",
+  "River North",
+  "Nearby luxury suburbs",
+];
+
 const serviceIconMap: Record<ServiceIconName, LucideIcon> = {
   hammer: Hammer,
   drafting: DraftingCompass,
@@ -101,8 +133,11 @@ const localBusinessSchema = {
     "Luxury kitchen remodeling, kitchen renovation, custom kitchen cabinets, kitchen island installation, countertop installation, cabinet refacing, and full kitchen remodel planning for premium homeowners.",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "325 N Wells Street, Suite 410",
     addressCountry: "US",
-    addressLocality: "Local Service Area",
+    addressLocality: "Chicago",
+    addressRegion: "IL",
+    postalCode: "60654",
   },
   areaServed: [
     "Local homeowners",
@@ -161,6 +196,85 @@ function CTAButtons({ className }: { className?: string }) {
       <a href="#transformations" className="luxury-button-secondary justify-center">
         Explore Projects
       </a>
+    </div>
+  );
+}
+
+function ContactMapSection() {
+  return (
+    <div className="mt-12 overflow-hidden rounded-[8px] border border-cream/12 bg-cream/[0.035]">
+      <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="p-5 sm:p-8 lg:p-10">
+          <p className="text-sm uppercase text-gold">Best way to reach us</p>
+          <h3 className="mt-4 text-3xl font-semibold leading-tight text-cream sm:text-4xl">
+            Visit the private design studio or book a free call first.
+          </h3>
+          <p className="mt-5 max-w-xl text-base leading-8 text-cream/68">
+            Most homeowners start with a short phone consultation. If the project
+            is a fit, we schedule measurements or a showroom appointment to
+            review layouts, cabinetry, stone, lighting, and budget ranges.
+          </p>
+
+          <div className="mt-8 grid gap-3">
+            {contactDetails.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.label}
+                  className="grid grid-cols-[44px_1fr] gap-4 rounded-[8px] border border-cream/10 bg-background/52 p-4"
+                >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-gold/25 bg-gold/10 text-gold">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-xs uppercase text-cream/42">
+                      {item.label}
+                    </span>
+                    <span className="mt-1 block text-sm font-medium leading-6 text-cream/80">
+                      {item.value}
+                    </span>
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 border-t border-cream/10 pt-6">
+            <p className="text-sm font-semibold text-cream">Primary service areas</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {serviceAreas.map((area) => (
+                <span
+                  key={area}
+                  className="rounded-full border border-cream/12 bg-cream/[0.04] px-3 py-1.5 text-xs text-cream/68"
+                >
+                  {area}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative min-h-[420px] border-t border-cream/10 bg-stone lg:border-l lg:border-t-0">
+          <iframe
+            title="LuxeCraft Kitchen Studio service area map"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-87.6607%2C41.8714%2C-87.6042%2C41.9106&layer=mapnik&marker=41.8910%2C-87.6230"
+            className="absolute inset-0 h-full w-full grayscale invert contrast-125"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,16,13,0.1),rgba(18,16,13,0.18)),radial-gradient(circle_at_22%_22%,rgba(184,151,91,0.22),transparent_34%)] mix-blend-multiply" />
+          <div className="absolute bottom-5 left-5 right-5 rounded-[8px] border border-cream/12 bg-charcoal/88 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl">
+            <p className="text-sm font-semibold text-cream">
+              Private showroom appointments available
+            </p>
+            <p className="mt-1 text-xs leading-5 text-cream/62">
+              Serving premium kitchen renovation projects across Chicago and
+              nearby luxury suburbs.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -390,6 +504,7 @@ export default function Home() {
               Get a clear plan, timeline, and quote direction from a premium
               kitchen remodeler before you commit to the project.
             </SectionHeading>
+            <ContactMapSection />
             <div className="mt-12">
               <ConsultationForm />
             </div>
@@ -682,10 +797,13 @@ export default function Home() {
               </li>
               <li className="flex gap-3">
                 <MapPin className="h-4 w-4 text-gold" aria-hidden="true" />
-                Serving premium local homeowners
+                325 N Wells Street, Suite 410, Chicago, IL 60654
               </li>
             </ul>
-            <p className="mt-5 text-sm">Service areas: Downtown, Northside, West End, Lake District, and nearby suburbs.</p>
+            <p className="mt-5 text-sm">
+              Service areas: Downtown, Northside, West End, Lake District, River
+              North, and nearby luxury suburbs.
+            </p>
           </div>
         </div>
         <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-cream/10 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
