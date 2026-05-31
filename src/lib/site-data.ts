@@ -157,7 +157,7 @@ export const kitchenStyles: KitchenStyle[] = [
       "Cream cabinetry, polished stone, open shelving, and bright surfaces that feel fresh all day.",
     bestFor: "Best for bright homes, vacation properties, and airy layouts",
     image:
-      "https://images.unsplash.com/photo-1556912173-3bb406ef7e8d?auto=format&fit=crop&w=1200&q=82",
+      "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=1200&q=82",
   },
 ];
 
