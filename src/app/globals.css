@@ -1,26 +1,196 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: oklch(17% 0.012 78);
+  --foreground: oklch(91% 0.026 83);
+  --charcoal: oklch(19% 0.012 78);
+  --charcoal-light: oklch(24% 0.016 76);
+  --cream: oklch(92% 0.038 84);
+  --cream-muted: oklch(78% 0.032 83);
+  --gold: oklch(72% 0.095 83);
+  --gold-light: oklch(80% 0.085 83);
+  --ink: oklch(18% 0.014 77);
+  --stone: oklch(31% 0.018 78);
+  --moss: oklch(55% 0.04 138);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-light: var(--charcoal-light);
+  --color-cream: var(--cream);
+  --color-cream-muted: var(--cream-muted);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-ink: var(--ink);
+  --color-stone: var(--stone);
+  --color-moss: var(--moss);
+  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: "Cascadia Mono", "Segoe UI Mono", ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, oklch(17% 0.012 78), oklch(15% 0.01 78) 42%),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Aptos", "Segoe UI Variable", "Segoe UI", ui-sans-serif,
+    system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+body::before {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  content: "";
+  opacity: 0.055;
+  background-image:
+    linear-gradient(transparent 0, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0.55px, transparent 0.65px);
+  background-size: 100% 7px, 18px 18px;
+  mix-blend-mode: overlay;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  letter-spacing: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.luxury-button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--gold) 62%, transparent);
+  background: var(--gold);
+  padding: 0.75rem 1.25rem;
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-button:hover {
+  background: var(--gold-light);
+}
+
+.luxury-button:active {
+  transform: translateY(1px);
+}
+
+.luxury-button-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--cream) 14%, transparent);
+  background: color-mix(in oklch, var(--cream) 4%, transparent);
+  padding: 0.75rem 1.25rem;
+  color: var(--cream);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-button-secondary:hover {
+  border-color: color-mix(in oklch, var(--gold) 55%, transparent);
+  background: color-mix(in oklch, var(--gold) 10%, transparent);
+  color: var(--gold);
+}
+
+.luxury-button-secondary:active {
+  transform: translateY(1px);
+}
+
+.luxury-input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid color-mix(in oklch, var(--cream) 14%, transparent);
+  background: color-mix(in oklch, var(--cream) 5%, transparent);
+  padding: 0.85rem 1rem;
+  color: var(--cream);
+  outline: none;
+  transition:
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-input::placeholder {
+  color: color-mix(in oklch, var(--cream) 42%, transparent);
+}
+
+.luxury-input:focus {
+  border-color: color-mix(in oklch, var(--gold) 62%, transparent);
+  background: color-mix(in oklch, var(--cream) 7%, transparent);
+}
+
+.luxury-input option {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.marble-surface {
+  background:
+    linear-gradient(135deg, rgba(246, 236, 214, 0.055), transparent 38%),
+    linear-gradient(65deg, rgba(184, 151, 91, 0.08), transparent 32%),
+    repeating-linear-gradient(
+      112deg,
+      rgba(246, 236, 214, 0.028) 0,
+      rgba(246, 236, 214, 0.028) 1px,
+      transparent 1px,
+      transparent 18px
+    ),
+    var(--charcoal-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
